@@ -1,0 +1,40 @@
+第一步：从阿里云市场上收集适用于我们系统的api
+阿里云api市场 https://market.aliyun.com/products/56956004/
+API的类别一共有下面8个：
+电子商务 金融理财 交通地理 企业管理 公共事务 气象水利 人工智能 生活服务
+我们分8个人分别找出每一个类别下面可以用来训练的api，这里可以用来训练的api是指像天气查询、翻译之类的api，可以用一句话表达清楚，并且能够从这句话里边提取到调用这个api所需要的参数（比如：我爱中国用英语怎么说，可以提取到应该调用翻译的api，from:中文 to:英文 text:我爱中国）
+每个人收集的结果就是对应api的url，保存为文本文件，每行一个，例如：https://market.aliyun.com/products/57126001/cmapi014302.html
+......
+
+第二步：针对手机的api格式化（我来负责）
+我会将所有api整理为如下csv格式：
+id, params, default_params, aliyun_url
+0, city date, city_default date_default, https://market.aliyun.com/products/57126001/cmapi014302.html
+1, text from_type to_type, text_default language_type_default language_type_default, https://market.aliyun.com/products/57002003/cmapi011252.html
+2,xxx
+3,xxx
+...
+
+第三步: 针对第二步格式化后的api，分别生成模板（分工完成）
+比如天气的api对应的模板如下：
+{city_default}{date_default}天气怎么样
+{date_default}{city_default}会下雨吗
+......
+
+第四步：针对第二步格式化后的api的default_params生成定义域（分工完成）
+第二步最终会生成非常多的defau_params，每一个params需要生成相应的取值范围
+比如city_default的定义域为:['北京市', '上海市', '杭州市', ...]
+
+第五步：针对第三步生成的模板和第四步对应的定义域生成训练集和标签
+比如天气api对应的训练集样本生成如下：
+{city_default}{date_default}天气怎么样 -> 杭州市明天天气怎么样
+{date_default}{city_default}会下雨吗 -> 后台北京市会下雨吗
+......
+
+第六步：算法模型和后续的原型系统开发
+
+备注：
+第二步一个人来完成是因为很多api会共用default_params，需要保证同名
+第三步生成的模板必须尽可能多
+第四部生成的定义域也必须尽可能多
+模型训练好之后需要实现一个原型系统应用这个模型并且完成真实的api调用和参数返回，这个估计也需要一些时间，所以前期的算法模型部分不能拖太久。
