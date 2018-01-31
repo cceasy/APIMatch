@@ -8,18 +8,20 @@ API的类别一共有下面8个：
 
 第二步：针对手机的api格式化（我来负责）
 我会将所有api整理为如下csv格式：
-id, params, default_params, aliyun_url
-0, city date, city_default date_default, https://market.aliyun.com/products/57126001/cmapi014302.html
-1, text from_type to_type, text_default language_type_default language_type_default, https://market.aliyun.com/products/57002003/cmapi011252.html
-2,xxx
-3,xxx
-...
+id, desc, default_params, mock_params, add_params, alt_params, resp_type, req_method, req_body, req_url, aliyun_url, appcode, remarks
+......
 
 第三步: 针对第二步格式化后的api，分别生成模板（分工完成）
 比如天气的api对应的模板如下：
 {city_default}{date_default}天气怎么样
 {date_default}{city_default}会下雨吗
 ......
+！！开始之前先看下202 204 208的api，确定没问题再开始
+生成模板的时候，{}的内容必须是csv文件default_params的参数(等于号后面的字段)，比如就id为100的翻译api来说，生成的模板可以是下面两个：
+{text}用{to_lan}怎么说？
+把{text}翻译成{to_lan}
+(后面的问号可以随机选择有没有)
+每个api的default_params可以选择部分，比如翻译的from_lan可以推导出来，就不用写在模板里头了。
 
 第四步：针对第二步格式化后的api的default_params生成定义域（分工完成）
 第二步最终会生成非常多的defau_params，每一个params需要生成相应的取值范围
@@ -31,7 +33,9 @@ id, params, default_params, aliyun_url
 {date_default}{city_default}会下雨吗 -> 后台北京市会下雨吗
 ......
 
-第六步：算法模型和后续的原型系统开发
+第六步：交叉生成测试集
+
+第七步：算法模型和后续的原型系统开发
 
 备注：
 第二步一个人来完成是因为很多api会共用default_params，需要保证同名
