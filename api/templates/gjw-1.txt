@@ -255,7 +255,7 @@
 
 
 305, "脑筋急转弯", "keyword=keyword_2", "keyword=%E5%A5%B3%E4%BA%BA&pagenum=1&pagesize=2", "pagenum=1&pagesize=2", "keyword={}&pagenum=1&pagesize=2", JSON, GET, None, "http://jisujzw.market.alicloudapi.com/jzw/search", "https://market.aliyun.com/products/57002003/cmapi011261.html", None, "keyword_2(string{搜索脑筋急转弯的词，一般是名词}[女人/花生])"
-1.{keyword_2}
+1.脑筋急转弯:{keyword_2}
 
 307, "单位换算-1", "amount=amount&unit=from_unit", "amount=1&unit=%E5%8D%83%E7%B1%B3", None, "amount={}&unit={}", JSON, GET, None, "http://jisudanwei.market.alicloudapi.com/unitconvert/convert", "https://market.aliyun.com/products/57002003/cmapi011243.html", None, "amout({换算的数量}[10/1000]) from_unit(enum{单位})"
 1.{amount}{from_unit}等于什么
